@@ -1,9 +1,10 @@
 package Bina;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 
-public class AtaxxBoard {
+public class AtaxxBoard{
 
 	public int  [][] board;
 
@@ -76,6 +77,8 @@ public class AtaxxBoard {
 		}
 		return board;
 	}
+
+
 	
 }
 	
