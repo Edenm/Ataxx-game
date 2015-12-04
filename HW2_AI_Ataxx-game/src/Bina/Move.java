@@ -1,15 +1,13 @@
 package Bina;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashSet;
 import java.util.PriorityQueue;
-import java.util.Set;
 
 
 public class Move implements Comparable<Move>{
 
 	//Set<Move> childrensMove;
+	E_Player player;
 	PriorityQueue<Move> childrensMove;
 	AtaxxBoard current;
 	
@@ -20,25 +18,26 @@ public class Move implements Comparable<Move>{
 //		this.current = current;
 //	}
 	
-	public Move(AtaxxBoard current,int deepLevel) {
+	public Move(AtaxxBoard current,int deepLevel, E_Player player) {
 		System.out.println("my depth: "+deepLevel);
-		//childrensMove= new HashSet<Move>();
+		System.out.println("my color: "+player);
+
 		childrensMove = new PriorityQueue<Move>();
-		this.current = current;
 		
+		this.current = current;
 		this.deepLevel=deepLevel;
+		this.player=player;
 		
 		if (this.deepLevel<HelperAtaxx.maxLevel){
 			setChildrensMove();
-			
 		}
 	}
 	
 	private void setChildrensMove(){
-		ArrayList<AtaxxBoard> possibleChildrens=HelperAtaxx.successor(current);
+		ArrayList<AtaxxBoard> possibleChildrens=HelperAtaxx.successor(current,player);
+		System.out.println("possibleChildrens :\n" +possibleChildrens);
 		for (AtaxxBoard ab : possibleChildrens) {
-			
-			childrensMove.add(new Move(ab, deepLevel+1));
+			childrensMove.add(new Move(ab, deepLevel+1,HelperAtaxx.getSecondPlayer(player)));
 		}
 	}
 	
@@ -47,9 +46,8 @@ public class Move implements Comparable<Move>{
 		System.out.println("my depth : "+ this.deepLevel);
 		if(childrensMove.size() > 0)
 		{
-		return childrensMove.peek().GetMaxOrMin();
+			return childrensMove.peek().GetMaxOrMin();
 		}
-	
 		return this;
 	}
 
@@ -58,9 +56,9 @@ public class Move implements Comparable<Move>{
 	public int compareTo(Move move) {
 		if(deepLevel % 2 == 0)
 		{
-		if(this.GetMaxOrMin().current.value() >= move.GetMaxOrMin().current.value())
-			return 1;
-		return -1;
+			if(this.GetMaxOrMin().current.value() >= move.GetMaxOrMin().current.value())
+				return 1;
+			return -1;
 		}
 		else
 		{

@@ -1,7 +1,6 @@
 package Bina;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 
 public class AtaxxBoard{
@@ -11,9 +10,9 @@ public class AtaxxBoard{
 	public AtaxxBoard() {
 		this.board = new int[HelperAtaxx.size][HelperAtaxx.size];
 		board[0][0]=1;
-		board[6][6]=1;
-		board[6][0]=2;
-		board[0][6]=2;
+		board[HelperAtaxx.size-1][HelperAtaxx.size-1]=1;
+		board[HelperAtaxx.size-1][0]=2;
+		board[0][HelperAtaxx.size-1]=2;
 	}
 	
 	public AtaxxBoard(int[][] board) {
@@ -66,7 +65,7 @@ public class AtaxxBoard{
 
 	@Override
 	public String toString() {
-		String board="";
+		String board="\n";
 		for (int i=0; i<HelperAtaxx.size ;i++) {
 			for (int j=0; j<HelperAtaxx.size ;j++) {
 					board+=this.board[i][j];
