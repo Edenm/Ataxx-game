@@ -6,6 +6,9 @@ import java.util.Arrays;
 public class AtaxxBoard{
 
 	public int  [][] board;
+	int ysrc, xsrc, xdes, ydes;
+	
+	
 
 	public AtaxxBoard() {
 		this.board = new int[HelperAtaxx.size][HelperAtaxx.size];
@@ -21,6 +24,16 @@ public class AtaxxBoard{
 			  for(int j=0; j<HelperAtaxx.size; j++)
 				  this.board[i][j]=board[i][j];
 	
+	}
+	
+	public AtaxxBoard AtaxxBoardClone(int[][] board) {
+		int[][] boardBla = new int[HelperAtaxx.size][HelperAtaxx.size];
+		for(int i=0; i<HelperAtaxx.size; i++)
+			  for(int j=0; j<HelperAtaxx.size; j++)
+				  this.board[i][j]=board[i][j];
+		AtaxxBoard temp =  new AtaxxBoard();
+		temp.board = boardBla;
+		return temp;
 	}
 
 	public int value(){
@@ -39,6 +52,13 @@ public class AtaxxBoard{
 		return white+black;
 	}
 	
+	public void UpDatePath(int ysrc,int xsrc,int xdes, int ydes)
+	{
+		this.ydes = ydes;
+		this.ysrc =ysrc;
+		this.xdes = xdes;
+		this.xsrc = xsrc;
+	}
 	
 	@Override
 	public int hashCode() {

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class HelperAtaxx {
 	static final int maxLevel=3;
-	static final int size=3;
+	static final int size=7;
 	
 	public static ArrayList<AtaxxBoard> successor (AtaxxBoard ab, E_Player p){
 		ArrayList<AtaxxBoard> possibleDirection= new ArrayList<AtaxxBoard>();
@@ -72,17 +72,26 @@ public class HelperAtaxx {
 		AtaxxBoard tempAb= new AtaxxBoard(ab.board);
 		applayMove(tempAb,xSrc, ySrc,xDest,yDest,numberOfStep,getSignOfPlayer(p),getSignOfPlayer(getSecondPlayer(p)));
 		if (!abArray.contains(tempAb))
+		{
+			tempAb.UpDatePath(ySrc, xSrc, xDest, yDest);
 			abArray.add(tempAb);
+		}
 	}
 	
 	public static void applayMove(AtaxxBoard ab, int xSrc, int ySrc, int xDest, int yDest, int numberOfStep, int player ,int secondPlayer){
-		//System.out.println("Color: "+xDest+","+yDest );
+		if(xDest <0 || xDest>= size || yDest<0 || yDest >= size)
+		{
+
+			return;
+		}
+		
 		ab.board[xDest][yDest]=player;
 		
 		if (numberOfStep>1){
 			ab.board[xSrc][ySrc]=0;
+			paintAroundMe( ab, xDest, yDest, player,secondPlayer);
 		}
-		paintAroundMe( ab, xDest, yDest, player,secondPlayer);
+		
 	}
 	
 
@@ -90,19 +99,19 @@ public class HelperAtaxx {
 		for (int i= 1; i<2; i++){
 			if(xDest-i>=0 && ab.board[xDest-i][yDest]==secondPlayer){
 				ab.board[xDest-i][yDest]=playerTurn;
-				System.out.println("1");
+				
 			}
 			if(xDest+i<HelperAtaxx.size &&  ab.board[xDest+i][yDest]==secondPlayer){
 				ab.board[xDest+i][yDest]=playerTurn;
-				System.out.println("2");
+				
 			}
 			if(yDest-i>=0 && ab.board[xDest][yDest-i]==secondPlayer){
 				ab.board[xDest][yDest-i]=playerTurn;
-				System.out.println("3");
+				
 			}
 			if(yDest+i<HelperAtaxx.size &&  ab.board[xDest][yDest+i]==secondPlayer){
 				ab.board[xDest][yDest+i]=playerTurn;
-				System.out.println("4");
+				
 			}
 		}
 	
@@ -123,14 +132,38 @@ public class HelperAtaxx {
 	}
 	
 	public static boolean isGoalState(AtaxxBoard ab ){
+		int countBlack = 0;
+		int countWhite = 0;
+		boolean isFull=true;
 		for (int i=0; i<HelperAtaxx.size; i++){
 			for (int j=0; j<HelperAtaxx.size; j++){
 				if (ab.board[i][j]==0){
-					return false;
+					isFull= false;
+				}
+				if (ab.board[i][j]==1){
+					countBlack++;
+				}
+				if (ab.board[i][j]==2){
+					countWhite++;
 				}
 			}	
 		}
-		return true;
+		
+		if (isFull || countBlack==0 || countWhite==0)
+			return true;
+		else 
+			return false;
 	}
 	
+	public static boolean  canGoToHuman (AtaxxBoard ab, int xSrc, int ySrc,E_Player p,AtaxxBoard PlayerMove ){
+		if(xSrc <0 || xSrc>= size || ySrc<0 || ySrc >= size)
+		{
+			return false;
+		}
+		ArrayList<AtaxxBoard> possibleDirection= new ArrayList<AtaxxBoard>();
+		canGoTo(possibleDirection,ab,xSrc,ySrc,E_Player.White);	
+		
+		return possibleDirection.contains(PlayerMove);
+		
+	}
 }
