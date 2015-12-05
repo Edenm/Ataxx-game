@@ -48,7 +48,6 @@ public class AtaxxBoard{
 						black--;
 			}
 		}
-		
 		return white+black;
 	}
 	
@@ -97,8 +96,6 @@ public class AtaxxBoard{
 		return board;
 	}
 
-
-	
 }
 	
 	

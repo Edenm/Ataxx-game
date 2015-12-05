@@ -23,9 +23,7 @@ public class AtaxxGame {
 		Move m = new Move(curAB, 0, E_Player.Black,null);
 		System.out.println("Start game:\n"+curAB);
 		while (!HelperAtaxx.isGoalState(curAB)){
-			
-			
-			//-------------------------------- AI move-----------------------------------------//
+		//-------------------------------- AI move-----------------------------------------//
 			m = m.getNextMove(m.GetMaxOrMin());
 			curAB = m.current;
 			System.out.println("Move from: x-" +m.current.xsrc + " y- "+m.current.ydes +" To x- "+m.current.xdes +" y- "+m.current.ydes);
@@ -33,41 +31,35 @@ public class AtaxxGame {
 			
 			if(HelperAtaxx.isGoalState(curAB))
 			{
-			isAIWin= true;
-			System.out.println("AI Won the game :-( ");
-			break;
+				isAIWin= true;
+				System.out.println("AI Won the game :-( ");
+				break;
 			}
 			
-			/////////Human Player////////
+		//-------------------------------- Human move--------------------------------------//
 			while(!goodMove)
 			{
-			System.out.println("Insert next step: " + curAB);
-			nextStep= s.nextLine();
-			String[] coordinates = nextStep.split(":");
-			xSrc=Integer.parseInt(coordinates[0]);
-			ySrc=Integer.parseInt(coordinates[1]);
-			xDest=Integer.parseInt(coordinates[2]);
-			yDest=Integer.parseInt(coordinates[3]);
-			tempBoard = new AtaxxBoard(curAB.board);
-			
-			numberOfStep=calcNumberOfStep(xSrc,ySrc,xDest,yDest);			
-			HelperAtaxx.applayMove(tempBoard, xSrc, ySrc, xDest, yDest, numberOfStep,HelperAtaxx.getSignOfPlayer(E_Player.White),HelperAtaxx.getSignOfPlayer(E_Player.Black));
-			goodMove = HelperAtaxx.canGoToHuman(curAB, xSrc, ySrc, E_Player.White, tempBoard);
-			if(!goodMove)
-				System.out.println("can do this move!");
+				System.out.println("Insert next step: ");
+				nextStep= s.nextLine();
+				String[] coordinates = nextStep.split(":");
+				xSrc=Integer.parseInt(coordinates[0]);
+				ySrc=Integer.parseInt(coordinates[1]);
+				xDest=Integer.parseInt(coordinates[2]);
+				yDest=Integer.parseInt(coordinates[3]);
+				tempBoard = new AtaxxBoard(curAB.board);
+				
+				numberOfStep=calcNumberOfStep(xSrc,ySrc,xDest,yDest);			
+				HelperAtaxx.applayMove(tempBoard, xSrc, ySrc, xDest, yDest, numberOfStep,HelperAtaxx.getSignOfPlayer(E_Player.White),HelperAtaxx.getSignOfPlayer(E_Player.Black));
+				goodMove = HelperAtaxx.canGoToHuman(curAB, xSrc, ySrc, E_Player.White, tempBoard);
+				if(!goodMove)
+					System.out.println("can do this move!");
 			}
 			goodMove = false;
 			
 			curAB = new AtaxxBoard(tempBoard.board);
-			
-			
-		    //---- private--------------//
 			m = new Move(curAB, 00, E_Player.Black, null);
 			
-			//---------------------------//
-			
 			System.out.println("current:\n " + curAB);
-		
 		}
 		if(!isAIWin)
 			System.out.println("You Won the game :-) ");

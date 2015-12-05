@@ -81,17 +81,13 @@ public class HelperAtaxx {
 	public static void applayMove(AtaxxBoard ab, int xSrc, int ySrc, int xDest, int yDest, int numberOfStep, int player ,int secondPlayer){
 		if(xDest <0 || xDest>= size || yDest<0 || yDest >= size)
 		{
-
 			return;
 		}
-		
 		ab.board[xDest][yDest]=player;
-		
 		if (numberOfStep>1){
 			ab.board[xSrc][ySrc]=0;
 			paintAroundMe( ab, xDest, yDest, player,secondPlayer);
 		}
-		
 	}
 	
 
@@ -99,19 +95,15 @@ public class HelperAtaxx {
 		for (int i= 1; i<2; i++){
 			if(xDest-i>=0 && ab.board[xDest-i][yDest]==secondPlayer){
 				ab.board[xDest-i][yDest]=playerTurn;
-				
 			}
 			if(xDest+i<HelperAtaxx.size &&  ab.board[xDest+i][yDest]==secondPlayer){
 				ab.board[xDest+i][yDest]=playerTurn;
-				
 			}
 			if(yDest-i>=0 && ab.board[xDest][yDest-i]==secondPlayer){
 				ab.board[xDest][yDest-i]=playerTurn;
-				
 			}
 			if(yDest+i<HelperAtaxx.size &&  ab.board[xDest][yDest+i]==secondPlayer){
 				ab.board[xDest][yDest+i]=playerTurn;
-				
 			}
 		}
 	
