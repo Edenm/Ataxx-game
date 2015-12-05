@@ -6,25 +6,14 @@ import java.util.PriorityQueue;
 
 public class Move implements Comparable<Move>{
 
-	//Set<Move> childrensMove;
 	E_Player player;
 	PriorityQueue<Move> childrensMove;
 	AtaxxBoard current;
 	Move fatherMove;
-	
-	
 	int deepLevel;
-
-//	public Move(AtaxxBoard current, int iSrc, int jSrc,int iDest, int jDest,int deepLevel) {
-//		childrensMove= new HashSet<Move>();
-//		this.current = current;
-//	}
 	
 	public Move(AtaxxBoard current,int deepLevel, E_Player player, Move father) {
-		
-
 		childrensMove = new PriorityQueue<Move>();
-		
 		this.current = current;
 		this.deepLevel=deepLevel;
 		this.player=player;
@@ -45,7 +34,6 @@ public class Move implements Comparable<Move>{
 	
 	public Move GetMaxOrMin()
 	{
-		
 		if(childrensMove.size() > 0)
 		{
 			return childrensMove.peek().GetMaxOrMin();
@@ -75,10 +63,7 @@ public class Move implements Comparable<Move>{
 		while (move.fatherMove != this)
 		{
 			move = move.fatherMove;
-		 
 		}
-		
-		
 		return move;
 	}
 	
