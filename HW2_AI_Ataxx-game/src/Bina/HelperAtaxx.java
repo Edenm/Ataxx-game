@@ -37,14 +37,14 @@ public class HelperAtaxx {
 	private static void  canGoTo (ArrayList<AtaxxBoard> possibleDirection,AtaxxBoard ab, int xSrc, int ySrc,E_Player p ){
 		
 		for (int i= 1; i<=3; i++){
-				if(xSrc-i>0 && ab.board[xSrc-i][ySrc]==0){
+				if(xSrc-i>=0 && ab.board[xSrc-i][ySrc]==0){
 					setNextMove(possibleDirection,ab,xSrc,  ySrc,xSrc-i,  ySrc, i, p);
 				}
 				if(xSrc+i<HelperAtaxx.size &&  ab.board[xSrc+i][ySrc]==0){
 					setNextMove(possibleDirection,ab,xSrc,  ySrc,xSrc+i,  ySrc, i, p);
 				}
 				
-				if(ySrc-i>0 && ab.board[xSrc][ySrc-i]==0){
+				if(ySrc-i>=0 && ab.board[xSrc][ySrc-i]==0){
 					setNextMove(possibleDirection,ab,xSrc,  ySrc,xSrc,  ySrc-i, i, p);
 				}
 				if(ySrc+i<HelperAtaxx.size &&  ab.board[xSrc][ySrc+i]==0){
@@ -53,7 +53,7 @@ public class HelperAtaxx {
 		}
 		
 		for (int i= 1; i<3; i++){
-			if(xSrc-i>0 && ySrc-i>0 && ab.board[xSrc-i][ySrc-i]==0){
+			if(xSrc-i>=0 && ySrc-i>=0 && ab.board[xSrc-i][ySrc-i]==0){
 				setNextMove(possibleDirection,ab,xSrc,  ySrc,xSrc-i,  ySrc-i, i, p);
 			}
 			if(xSrc+i<HelperAtaxx.size && ySrc-i>0 && ab.board[xSrc+i][ySrc-i]==0){
@@ -62,7 +62,7 @@ public class HelperAtaxx {
 			if(xSrc+i<HelperAtaxx.size && ySrc+i<HelperAtaxx.size && ab.board[xSrc+i][ySrc+i]==0){
 				setNextMove(possibleDirection,ab,xSrc,  ySrc,xSrc+i,  ySrc+i, i, p);
 			}
-			if(xSrc-i>0 && ySrc+i<HelperAtaxx.size && ab.board[xSrc-i][ySrc+i]==0){
+			if(xSrc-i>=0 && ySrc+i<HelperAtaxx.size && ab.board[xSrc-i][ySrc+i]==0){
 				setNextMove(possibleDirection,ab,xSrc,  ySrc,xSrc-i,  ySrc+i, i, p);
 			}
 		}
@@ -154,7 +154,6 @@ public class HelperAtaxx {
 		}
 		ArrayList<AtaxxBoard> possibleDirection= new ArrayList<AtaxxBoard>();
 		canGoTo(possibleDirection,ab,xSrc,ySrc,E_Player.White);	
-		
 		return possibleDirection.contains(PlayerMove);
 		
 	}

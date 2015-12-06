@@ -26,8 +26,8 @@ public class AtaxxGame {
 		//-------------------------------- AI move-----------------------------------------//
 			m = m.getNextMove(m.GetMaxOrMin());
 			curAB = m.current;
-			System.out.println("Move from: x-" +m.current.xsrc + " y- "+m.current.ydes +" To x- "+m.current.xdes +" y- "+m.current.ydes);
 			System.out.println("AI move:\n"+curAB);
+			System.out.println("Move from: x-" +m.current.xsrc + " y- "+m.current.ydes +" To x- "+m.current.xdes +" y- "+m.current.ydes);
 			
 			if(HelperAtaxx.isGoalState(curAB))
 			{
@@ -39,20 +39,27 @@ public class AtaxxGame {
 		//-------------------------------- Human move--------------------------------------//
 			while(!goodMove)
 			{
-				System.out.println("Insert next step: ");
-				nextStep= s.nextLine();
-				String[] coordinates = nextStep.split(":");
-				xSrc=Integer.parseInt(coordinates[0]);
-				ySrc=Integer.parseInt(coordinates[1]);
-				xDest=Integer.parseInt(coordinates[2]);
-				yDest=Integer.parseInt(coordinates[3]);
-				tempBoard = new AtaxxBoard(curAB.board);
+				try{
+					System.out.println("Insert next step: ");
+					nextStep= s.nextLine();
+					String[] coordinates = nextStep.split(":");
+					xSrc=Integer.parseInt(coordinates[0]);
+					ySrc=Integer.parseInt(coordinates[1]);
+					xDest=Integer.parseInt(coordinates[2]);
+					yDest=Integer.parseInt(coordinates[3]);
+					tempBoard = new AtaxxBoard(curAB.board);
 				
-				numberOfStep=calcNumberOfStep(xSrc,ySrc,xDest,yDest);			
-				HelperAtaxx.applayMove(tempBoard, xSrc, ySrc, xDest, yDest, numberOfStep,HelperAtaxx.getSignOfPlayer(E_Player.White),HelperAtaxx.getSignOfPlayer(E_Player.Black));
-				goodMove = HelperAtaxx.canGoToHuman(curAB, xSrc, ySrc, E_Player.White, tempBoard);
-				if(!goodMove)
-					System.out.println("can do this move!");
+					if (curAB.board[xSrc][ySrc]==HelperAtaxx.getSignOfPlayer(E_Player.White)){
+						numberOfStep=calcNumberOfStep(xSrc,ySrc,xDest,yDest);	
+						HelperAtaxx.applayMove(tempBoard, xSrc, ySrc, xDest, yDest, numberOfStep,HelperAtaxx.getSignOfPlayer(E_Player.White),HelperAtaxx.getSignOfPlayer(E_Player.Black));
+						goodMove = HelperAtaxx.canGoToHuman(curAB, xSrc, ySrc, E_Player.White, tempBoard);
+					}
+					if(!goodMove)
+						System.out.println("can do this move!");
+					
+				}catch(Exception ex){
+					System.out.println("Please insert step in this template:  xSrc:ySrc:xDest:yDest \n");
+				}
 			}
 			goodMove = false;
 			
