@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 
 public class HelperAtaxx {
-	static final int maxLevel=3;
-	static final int size=7;
+	static final int maxLevel=7;
+	static final int size=5;
 	
 	public static ArrayList<AtaxxBoard> successor (AtaxxBoard ab, E_Player p){
 		ArrayList<AtaxxBoard> possibleDirection= new ArrayList<AtaxxBoard>();
@@ -56,7 +56,7 @@ public class HelperAtaxx {
 			if(xSrc-i>=0 && ySrc-i>=0 && ab.board[xSrc-i][ySrc-i]==0){
 				setNextMove(possibleDirection,ab,xSrc,  ySrc,xSrc-i,  ySrc-i, i, p);
 			}
-			if(xSrc+i<HelperAtaxx.size && ySrc-i>0 && ab.board[xSrc+i][ySrc-i]==0){
+			if(xSrc+i<HelperAtaxx.size && ySrc-i>=0 && ab.board[xSrc+i][ySrc-i]==0){
 				setNextMove(possibleDirection,ab,xSrc,  ySrc,xSrc+i,  ySrc-i, i, p);
 			}
 			if(xSrc+i<HelperAtaxx.size && ySrc+i<HelperAtaxx.size && ab.board[xSrc+i][ySrc+i]==0){

@@ -12,6 +12,10 @@ public class Move implements Comparable<Move>{
 	Move fatherMove;
 	int deepLevel;
 	
+	static int numberOfLeaf=0;
+	static long tStart, tEnd, tDelta;
+	static double elapsedSeconds;
+	
 	public Move(AtaxxBoard current,int deepLevel, E_Player player, Move father) {
 		childrensMove = new PriorityQueue<Move>();
 		this.current = current;
@@ -19,8 +23,21 @@ public class Move implements Comparable<Move>{
 		this.player=player;
 		this.fatherMove = father;
 		
-		if (this.deepLevel<HelperAtaxx.maxLevel){
+		if (this.deepLevel==0){
+			tStart = System.currentTimeMillis();
+		}
+		
+
+		tEnd = System.currentTimeMillis();
+		tDelta = tEnd - tStart;
+		elapsedSeconds = tDelta / 1000.0;
+		
+		if (this.deepLevel<HelperAtaxx.maxLevel){ // && elapsedSeconds<15){
 			setChildrensMove();
+		}
+		else{
+			//System.out.println("Deep level in 15 second is: "+ this.deepLevel);
+			numberOfLeaf++;
 		}
 	}
 	

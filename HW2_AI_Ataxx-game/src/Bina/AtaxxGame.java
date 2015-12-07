@@ -11,23 +11,30 @@ public class AtaxxGame {
 		curAB=new AtaxxBoard();
 	}
 
-
-
 	public void run(){
 		Scanner s= new Scanner(System.in);
 		String nextStep;
-		boolean isAIWin = false;
-		AtaxxBoard tempBoard = null;
-		boolean goodMove = false;
+		boolean isAIWin = false, goodMove = false;
+		long tStart, tEnd ,tDelta;
+		double elapsedSeconds;
 		int xSrc,ySrc,xDest,yDest, numberOfStep;
+		AtaxxBoard tempBoard = null;
+		
+		tStart = System.currentTimeMillis();
 		Move m = new Move(curAB, 0, E_Player.Black,null);
+		tEnd = System.currentTimeMillis();
+		tDelta = tEnd - tStart;
+		elapsedSeconds = tDelta / 1000.0;
 		System.out.println("Start game:\n"+curAB);
 		while (!HelperAtaxx.isGoalState(curAB)){
 		//-------------------------------- AI move-----------------------------------------//
 			m = m.getNextMove(m.GetMaxOrMin());
 			curAB = m.current;
-			System.out.println("AI move:\n"+curAB);
+			System.out.println("AI move:\n");
+			System.out.println("Time of calc this move is: "+elapsedSeconds+" sec");
+			System.out.println("Number of leaf: "+Move.numberOfLeaf );
 			System.out.println("Move from: x-" +m.current.xsrc + " y- "+m.current.ydes +" To x- "+m.current.xdes +" y- "+m.current.ydes);
+			System.out.println(curAB);
 			
 			if(HelperAtaxx.isGoalState(curAB))
 			{
@@ -64,7 +71,12 @@ public class AtaxxGame {
 			goodMove = false;
 			
 			curAB = new AtaxxBoard(tempBoard.board);
-			m = new Move(curAB, 00, E_Player.Black, null);
+			Move.numberOfLeaf=0;
+			tStart = System.currentTimeMillis();
+			m = new Move(curAB, 0, E_Player.Black, null);
+			tEnd = System.currentTimeMillis();
+			tDelta = tEnd - tStart;
+			elapsedSeconds = tDelta / 1000.0;
 			
 			System.out.println("current:\n " + curAB);
 		}
