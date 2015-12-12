@@ -32,11 +32,10 @@ public class Move implements Comparable<Move>{
 		tDelta = tEnd - tStart;
 		elapsedSeconds = tDelta / 1000.0;
 		
-		if (this.deepLevel<HelperAtaxx.maxLevel){ // && elapsedSeconds<15){
+		if (this.deepLevel<HelperAtaxx.maxLevel){
 			setChildrensMove();
 		}
 		else{
-			//System.out.println("Deep level in 15 second is: "+ this.deepLevel);
 			numberOfLeaf++;
 		}
 	}

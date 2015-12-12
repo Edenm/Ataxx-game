@@ -33,7 +33,7 @@ public class AtaxxGame {
 			System.out.println("AI move:\n");
 			System.out.println("Time of calc this move is: "+elapsedSeconds+" sec");
 			System.out.println("Number of leaf: "+Move.numberOfLeaf );
-			System.out.println("Move from: x-" +m.current.xsrc + " y- "+m.current.ydes +" To x- "+m.current.xdes +" y- "+m.current.ydes);
+			System.out.println("Move from: x-" +m.current.xsrc + " y- "+m.current.ysrc +" To x- "+m.current.xdes +" y- "+m.current.ydes);
 			System.out.println(curAB);
 			
 			if(HelperAtaxx.isGoalState(curAB))
