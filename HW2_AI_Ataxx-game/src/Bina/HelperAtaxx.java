@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 public class HelperAtaxx {
-	static final int maxLevel=4;
+	static final int maxLevel=2;
 	static final int size=7;
 	
 	public static ArrayList<AtaxxBoard> successor (AtaxxBoard ab, E_Player p){
